@@ -1,0 +1,55 @@
+name: distraction-control-env
+description: >
+  A reinforcement learning environment that simulates real-world digital distraction
+  management. The agent must take actions to reduce user distraction and improve
+  productivity based on energy and distraction levels.
+
+version: 1.0.0
+
+authors:
+  - name: Kavya Sharma
+  - name: Pall Gautam
+  - name: Insha Zaidi
+
+environment:
+  entry_point: env.py:DistractionEnv
+
+observation_space:
+  type: object
+  properties:
+    distraction_level:
+      type: integer
+      minimum: 0
+      maximum: 100
+    energy:
+      type: integer
+      minimum: 0
+      maximum: 100
+
+action_space:
+  type: string
+  enum:
+    - allow_usage
+    - block_app
+    - start_focus_session
+    - give_break
+
+reward:
+  type: float
+  description: >
+    Reward is based on reducing distraction and maintaining healthy energy levels.
+    Positive reward is given for productive actions, while penalties are applied
+    for high distraction and inefficient behavior.
+
+tasks:
+  - name: easy
+    description: Low distraction, high energy scenario
+  - name: medium
+    description: Moderate distraction and energy levels
+  - name: hard
+    description: High distraction and low energy scenario
+
+metadata:
+  difficulty_levels: 3
+  deterministic: true
+  requires_api: true
