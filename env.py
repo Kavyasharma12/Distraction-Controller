@@ -65,7 +65,7 @@ class DistractionEnv:
         if self.state_data["pending_tasks"] == 0 or self.state_data["time"] >= 18:
             done = True
 
-        return self.state_data, reward, done, {}
+        return obs, reward, done, {}
 
     def state(self):
         return self.state_data
