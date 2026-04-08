@@ -8,13 +8,13 @@ class DistractionEnv:
         else:
             self.state_data = {
                 "distraction_level": 50,
-                "energy": 50
+                "energy": 50,
+                "pending_tasks": 5,
+                "time": 0,
+                "current_app": "none"
             }
 
-        return {
-            "distraction_level": self.state_data["distraction_level"],
-            "energy": self.state_data["energy"]
-        }
+        return self.state_data
 
     def step(self, action):
         reward = 0
@@ -49,14 +49,13 @@ class DistractionEnv:
         # penalties
         if self.state_data["distraction_level"] > 80:
             reward -= 2
-
         if self.state_data["energy"] < 20:
             reward -= 1
 
         # time update
         self.state_data["time"] += 1
 
-        # clamp
+        # clamp values
         self.state_data["distraction_level"] = max(0, min(100, self.state_data["distraction_level"]))
         self.state_data["energy"] = max(0, min(100, self.state_data["energy"]))
         self.state_data["pending_tasks"] = max(0, self.state_data["pending_tasks"])
@@ -65,7 +64,8 @@ class DistractionEnv:
         if self.state_data["pending_tasks"] == 0 or self.state_data["time"] >= 18:
             done = True
 
-        return obs, reward, done, {}
+        # ✅ FIX: return correct observation
+        return self.state_data, reward, done, {}
 
     def state(self):
         return self.state_data
