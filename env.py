@@ -4,16 +4,17 @@ class DistractionEnv:
 
     def reset(self, custom_state=None):
         if custom_state:
-            self.state_data = custom_state
+            self.state_data = custom_state.copy()
         else:
             self.state_data = {
-                "time": 9,
-                "energy": 80,
-                "pending_tasks": 5,
-                "distraction_level": 60,
-                "current_app": "instagram"
+                "distraction_level": 50,
+                "energy": 50
             }
-        return self.state_data
+
+        return {
+            "distraction_level": self.state_data["distraction_level"],
+            "energy": self.state_data["energy"]
+        }
 
     def step(self, action):
         reward = 0
