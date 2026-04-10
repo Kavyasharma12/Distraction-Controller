@@ -68,4 +68,7 @@ class DistractionEnv:
         return self.state_data, reward, done, {}
 
     def state(self):
-        return self.state_data
+        return {
+        "distraction_level": self.state_data["distraction_level"],
+        "energy": self.state_data["energy"]
+    }
