@@ -65,8 +65,12 @@ class DistractionEnv:
             done = True
 
         # ✅ FIX: return correct observation
-        return self.state_data, reward, done, {}
+        obs = {
+            "distraction_level": self.state_data["distraction_level"],
+            "energy": self.state_data["energy"]
+        }
 
+return obs, reward, done, {}
     def state(self):
         return {
         "distraction_level": self.state_data["distraction_level"],
