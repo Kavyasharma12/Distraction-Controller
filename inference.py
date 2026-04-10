@@ -18,18 +18,3 @@ def step(action):
         "reward": reward,
         "done": done
     }
-
-if __name__ == "__main__":
-    print("START")
-
-    obs = reset()
-    print("STEP", obs)
-
-    # ⚠️ CRITICAL: use ALL possible actions at least once
-    actions = ["block_app", "start_focus_session", "give_break", "allow_usage"]
-
-    for action in actions:
-        result = step(action)
-        print("STEP", result)
-
-    print("END")
