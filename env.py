@@ -9,15 +9,15 @@ class DistractionEnv:
             self.state_data = {
                 "distraction_level": 50,
                 "energy": 50,
-                "pending_tasks": 5,
-                "time": 0,
-                "current_app": "none"
+                "pending_tasks": 5,     # ✅ ADD
+                "time": 0,              # ✅ ADD
+                "current_app": "none"   # ✅ ADD
             }
 
-        return {
-            "distraction_level": self.state_data["distraction_level"],
-            "energy": self.state_data["energy"]
-        }
+    return {
+        "distraction_level": self.state_data["distraction_level"],
+        "energy": self.state_data["energy"]
+    }
 
     def step(self, action):
         reward = 0
@@ -33,7 +33,8 @@ class DistractionEnv:
 
         elif action == "start_focus_session":
             if self.state_data["energy"] > 20:
-                self.state_data["pending_tasks"] -= 1
+                if self.state_data["pending_tasks"] > 0:
+                    self.state_data["pending_tasks"] -= 1
                 self.state_data["energy"] -= 15
                 self.state_data["distraction_level"] -= 15
                 reward += 2
