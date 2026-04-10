@@ -70,7 +70,7 @@ class DistractionEnv:
             "energy": self.state_data["energy"]
         }
 
-return obs, reward, done, {}
+        return obs, reward, done, {}
     def state(self):
         return {
         "distraction_level": self.state_data["distraction_level"],
