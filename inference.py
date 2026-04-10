@@ -13,11 +13,13 @@ def step(action):
         "done": done
     }
 if __name__ == "__main__":
-    print("Starting environment...")
+    print("START")
 
     obs = reset()
-    print("Initial state:", obs)
+    print("STEP", obs)
 
     for _ in range(3):
         result = step("start_focus_session")
-        print("Step result:", result)
+        print("STEP", result)
+
+    print("END")
