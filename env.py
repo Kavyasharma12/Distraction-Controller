@@ -14,7 +14,10 @@ class DistractionEnv:
                 "current_app": "none"
             }
 
-        return self.state_data
+        return {
+            "distraction_level": self.state_data["distraction_level"],
+            "energy": self.state_data["energy"]
+        }
 
     def step(self, action):
         reward = 0
