@@ -6,4 +6,4 @@ COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "baseline.py"]
+CMD ["python", "-m", "http.server", "7860"]
