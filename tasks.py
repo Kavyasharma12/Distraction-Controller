@@ -3,35 +3,20 @@ from grader import grade
 
 def task1():
     env = DistractionEnv()
-    env.reset({
-        "distraction_level": 50,
-        "energy": 50,
-        "pending_tasks": 5,
-        "time": 0
-    })
-    env.step("start_focus_session")
+    env.reset()
+    env.step("start_focus_session")  # reduces pending
     return grade(env)
 
 def task2():
     env = DistractionEnv()
-    env.reset({
-        "distraction_level": 70,
-        "energy": 40,
-        "pending_tasks": 5,
-        "time": 0
-    })
-    env.step("block_app")
+    env.reset()
+    env.step("block_app")  # no pending change
     return grade(env)
 
 def task3():
     env = DistractionEnv()
-    env.reset({
-        "distraction_level": 30,
-        "energy": 60,
-        "pending_tasks": 5,
-        "time": 0
-    })
-    env.step("give_break")
+    env.reset()
+    env.step("give_break")  # different behavior
     return grade(env)
 
 tasks = [task1, task2, task3]
