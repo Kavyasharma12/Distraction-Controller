@@ -1,10 +1,11 @@
 def grade(env, initial_tasks=5):
-    pending = env.state_data.get("pending_tasks", initial_tasks)
-    completed = initial_tasks - pending
+    completed = initial_tasks - env.state_data["pending_tasks"]
     score = completed / initial_tasks
 
+    # MUST be strictly between 0 and 1
     if score <= 0:
-        return 0.2
-    elif score >= 1:
-        return 0.8
+        score = 0.1
+    if score >= 1:
+        score = 0.9
+
     return score
