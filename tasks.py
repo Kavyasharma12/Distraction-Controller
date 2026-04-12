@@ -17,3 +17,4 @@ def task3():
     env.reset()
     env.step("block_app")
     return grade(env)
+tasks = [task1, task2, task3]
