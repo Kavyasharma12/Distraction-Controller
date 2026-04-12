@@ -42,12 +42,14 @@ reward:
     for high distraction and inefficient behavior.
 
 tasks:
-  - name: easy
-    description: Low distraction, high energy scenario
-  - name: medium
-    description: Moderate distraction and energy levels
-  - name: hard
-    description: High distraction and low energy scenario
+  - name: task1
+    grader: grader:grade
+
+  - name: task2
+    grader: grader:grade
+
+  - name: task3
+    grader: grader:grade
 
 metadata:
   difficulty_levels: 3
