@@ -1,12 +1,23 @@
+from env import DistractionEnv
+
 def task1():
-    return 0.3
+    env = DistractionEnv()
+    env.reset()
+    env.step("start_focus_session")
+    return env
 
 def task2():
-    return 0.5
+    env = DistractionEnv()
+    env.reset()
+    env.step("start_focus_session")
+    env.step("start_focus_session")
+    return env
 
 def task3():
-    return 0.7
+    env = DistractionEnv()
+    env.reset()
+    env.step("start_focus_session")
+    env.step("block_app")
+    return env
 
 tasks = [task1, task2, task3]
-
-__all__ = ["tasks"]
