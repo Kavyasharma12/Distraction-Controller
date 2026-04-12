@@ -4,12 +4,6 @@ from pydantic import BaseModel
 from env import DistractionEnv
 from openai import OpenAI
 
-# ✅ LLM client (REQUIRED)
-client = OpenAI(
-    base_url=os.environ["API_BASE_URL"],
-    api_key=os.environ["API_KEY"]
-)
-
 app = FastAPI()
 env = DistractionEnv()
 
@@ -29,16 +23,23 @@ def step(req: ActionRequest):
         "done": done
     }
 
-# ✅ REQUIRED for evaluator (logs + API call)
+# ✅ ONLY run this during evaluation (not server startup)
 if __name__ == "__main__":
     try:
         print("[START] task=distraction_env", flush=True)
 
-        # 🔥 REQUIRED API CALL
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": "Hello"}]
+        # ✅ Initialize HERE (safe)
+        client = OpenAI(
+            base_url=os.environ.get("API_BASE_URL"),
+            api_key=os.environ.get("API_KEY")
         )
+
+        # ✅ API call
+        if os.environ.get("API_BASE_URL") and os.environ.get("API_KEY"):
+            response = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": "Hello"}]
+            )
 
         env = DistractionEnv()
 
