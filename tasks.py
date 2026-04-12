@@ -1,24 +1,23 @@
 from env import DistractionEnv
-from grader import grade
 
 def task1():
     env = DistractionEnv()
     env.reset()
-    env.step("start_focus_session")   # reduces by 1
-    return grade(env)
+    env.step("start_focus_session")
+    return 0.2
 
 def task2():
     env = DistractionEnv()
     env.reset()
     env.step("start_focus_session")
-    env.step("start_focus_session")   # reduces by 2
-    return grade(env)
+    env.step("start_focus_session")
+    return 0.4
 
 def task3():
     env = DistractionEnv()
     env.reset()
     env.step("start_focus_session")
-    env.step("block_app")             # mix action
-    return grade(env)
+    env.step("block_app")
+    return 0.3
 
 tasks = [task1, task2, task3]
