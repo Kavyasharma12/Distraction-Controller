@@ -1,23 +1,19 @@
-easy_task = {
-    "time": 9,
-    "energy": 80,
-    "pending_tasks": 3,
-    "distraction_level": 40,
-    "current_app": "none"
-}
+from env import DistractionEnv
+from grader import grade
 
-medium_task = {
-    "time": 9,
-    "energy": 60,
-    "pending_tasks": 5,
-    "distraction_level": 60,
-    "current_app": "youtube"
-}
+def task1():
+    env = DistractionEnv()
+    env.reset()
+    return grade(env)
 
-hard_task = {
-    "time": 9,
-    "energy": 40,
-    "pending_tasks": 7,
-    "distraction_level": 80,
-    "current_app": "instagram"
-}
+def task2():
+    env = DistractionEnv()
+    env.reset()
+    env.step("start_focus_session")
+    return grade(env)
+
+def task3():
+    env = DistractionEnv()
+    env.reset()
+    env.step("block_app")
+    return grade(env)
