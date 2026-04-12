@@ -1,18 +1,20 @@
-import os
+from fastapi import FastAPI
+from pydantic import BaseModel
 from env import DistractionEnv
 
-# required env variables
-API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
-MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
-HF_TOKEN = os.getenv("HF_TOKEN")
-
+app = FastAPI()
 env = DistractionEnv()
 
+class ActionRequest(BaseModel):
+    action: str
+
+@app.post("/reset")
 def reset():
     return env.reset()
 
-def step(action):
-    obs, reward, done, _ = env.step(action)
+@app.post("/step")
+def step(req: ActionRequest):
+    obs, reward, done, _ = env.step(req.action)
     return {
         "observation": obs,
         "reward": reward,
